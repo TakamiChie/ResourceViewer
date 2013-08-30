@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AnimationFragment" >
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <Spinner
+        android:id="@+id/in_animationtype"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:prompt="@android:string/ok" />
+
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center_horizontal" >
+
+        <ImageView
+            android:id="@+id/out_animate"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:contentDescription="@string/hint_animate"
+            android:src="@drawable/ic_launcher" />
+
+    </FrameLayout>
+
+</LinearLayout>
