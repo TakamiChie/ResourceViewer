@@ -1,5 +1,8 @@
 package net.onpu_tamago.android.resourceviewer.viewer;
 
+import java.lang.reflect.Field;
+
+import net.onpu_tamago.android.resourceviewer.MainActivity;
 import net.onpu_tamago.android.resourceviewer.R;
 import net.onpu_tamago.android.resourceviewer.classes.NameValuePair;
 import android.os.Bundle;
@@ -38,6 +41,20 @@ public class AnimationFragment extends AbstractViewerFragment implements
 		return android.R.anim.class;
 	}
 
+	@Override
+	protected boolean filtering(Field field) {
+		boolean add;
+		boolean interpolator = field.getName().contains("interpolator");
+		boolean animation = getArguments().getInt(MainActivity.EXTRA_INDEX, 0) == 0;
+
+		if (animation) {
+			add = !interpolator;
+		} else {
+			add = interpolator;
+		}
+		return add;
+	}
+	
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
