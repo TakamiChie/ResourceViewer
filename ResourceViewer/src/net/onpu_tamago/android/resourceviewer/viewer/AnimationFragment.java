@@ -1,14 +1,8 @@
 package net.onpu_tamago.android.resourceviewer.viewer;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-
-import net.onpu_tamago.android.resourceviewer.MainActivity;
 import net.onpu_tamago.android.resourceviewer.R;
 import net.onpu_tamago.android.resourceviewer.classes.NameValuePair;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,15 +15,16 @@ import android.widget.ArrayAdapter;
 import com.androidquery.AQuery;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass.
- * 
+ * アニメーション・インターポレーターを確認する際のフラグメント
+ * @author 知英
+ *
  */
-public class AnimationFragment extends Fragment implements
+public class AnimationFragment extends AbstractViewerFragment implements
 		OnItemSelectedListener {
 
+	@SuppressWarnings("unused")
 	private static final String TAG = "[Animation]ResourceViewer";
 	private View mView;
-	private ArrayList<NameValuePair> mIds;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,32 +34,13 @@ public class AnimationFragment extends Fragment implements
 	}
 
 	@Override
+	protected Class<?> getListupClass() {
+		return android.R.anim.class;
+	}
+
+	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-
-		Field[] fields = android.R.anim.class.getFields();
-		mIds = new ArrayList<NameValuePair>();
-		boolean animation = getArguments().getInt(MainActivity.EXTRA_INDEX, 0) == 0;
-
-		for (Field f : fields) {
-			try {
-				boolean add;
-				boolean interpolator = f.getName().contains("interpolator");
-				if (animation) {
-					add = !interpolator;
-				} else {
-					add = interpolator;
-				}
-				if (add) {
-					Log.d(TAG, f.getName());
-					mIds.add(new NameValuePair(f.getName(), f.getInt(null)));
-				}
-			} catch (IllegalArgumentException e) {
-				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException(e);
-			}
-		}
 
 		AQuery $ = new AQuery(mView);
 
@@ -72,14 +48,14 @@ public class AnimationFragment extends Fragment implements
 				.adapter(
 						new ArrayAdapter<NameValuePair>(getActivity(),
 								android.R.layout.simple_spinner_dropdown_item,
-								mIds)).getSpinner()
+								getIDList())).getSpinner()
 				.setOnItemSelectedListener(this);
 	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> adapterview, View view,
 			int position, long id) {
-		NameValuePair pair = mIds.get(position);
+		NameValuePair pair = getValue(position);
 
 		Animation animation;
 		if (pair.name.contains("interpolator")) {
