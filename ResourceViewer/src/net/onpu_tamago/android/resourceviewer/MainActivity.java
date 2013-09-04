@@ -1,6 +1,7 @@
 package net.onpu_tamago.android.resourceviewer;
 
 import net.onpu_tamago.android.resourceviewer.viewer.AnimationFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.AnimatorFragment;
 import android.app.ActionBar;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -66,6 +67,9 @@ public class MainActivity extends FragmentActivity implements
 		case 0:
 		case 1:
 			fragment = new AnimationFragment();
+			break;
+		case 2:
+			fragment = new AnimatorFragment();
 			break;
 		default:
 			break;
