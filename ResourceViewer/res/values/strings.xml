@@ -4,10 +4,12 @@
     <string name="app_name">ResourceViewer</string>
     <string name="action_settings">Settings</string>
     <string name="hint_animate">Animation Image</string>
+
     <string-array name="title_fragments">
-        <item >アニメーション</item>
-        <item >インタポーレータ</item>
-        <item >アニメーター</item>
+        <item>アニメーション</item>
+        <item>インタポーレータ</item>
+        <item>アニメーター</item>
+        <item >配列</item>
     </string-array>
 
 </resources>

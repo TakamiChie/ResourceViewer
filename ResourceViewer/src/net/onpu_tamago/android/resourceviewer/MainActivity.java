@@ -2,6 +2,7 @@ package net.onpu_tamago.android.resourceviewer;
 
 import net.onpu_tamago.android.resourceviewer.viewer.AnimationFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.AnimatorFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.ArrayFragment;
 import android.app.ActionBar;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -70,6 +71,9 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		case 2:
 			fragment = new AnimatorFragment();
+			break;
+		case 3:
+			fragment = new ArrayFragment();
 			break;
 		default:
 			break;
