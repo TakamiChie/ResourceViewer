@@ -48,7 +48,14 @@ public class AnimationFragment extends Fragment implements
 
 		for (Field f : fields) {
 			try {
-				if (!animation || !f.getName().contains("interpolator")) {
+				boolean add;
+				boolean interpolator = f.getName().contains("interpolator");
+				if (animation) {
+					add = !interpolator;
+				} else {
+					add = interpolator;
+				}
+				if (add) {
 					Log.d(TAG, f.getName());
 					mIds.add(new NameValuePair(f.getName(), f.getInt(null)));
 				}
@@ -73,19 +80,20 @@ public class AnimationFragment extends Fragment implements
 	public void onItemSelected(AdapterView<?> adapterview, View view,
 			int position, long id) {
 		NameValuePair pair = mIds.get(position);
-		
+
 		Animation animation;
-		if(pair.name.contains("interpolator")){
+		if (pair.name.contains("interpolator")) {
 			// インターポーレータ
-			animation = AnimationUtils.loadAnimation(getActivity(), R.anim.demo_animation);
+			animation = AnimationUtils.loadAnimation(getActivity(),
+					R.anim.demo_animation);
 			animation.setInterpolator(getActivity(), pair.value);
 			animation.setRepeatMode(Animation.REVERSE);
-		}else{
+		} else {
 			// アニメーション
 			animation = AnimationUtils.loadAnimation(getActivity(), pair.value);
 			animation.setRepeatMode(Animation.REVERSE);
 		}
-		
+
 		AQuery $ = new AQuery(mView);
 		$.id(R.id.out_animate).animate(animation);
 	}
