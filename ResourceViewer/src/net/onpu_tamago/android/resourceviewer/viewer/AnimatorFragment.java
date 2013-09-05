@@ -45,10 +45,10 @@ public class AnimatorFragment extends AbstractViewerFragment implements OnItemSe
 	}
 
 	@Override
-	public void onItemSelected(AdapterView<?> adapterview, View view,
+	public void onItemSelected(AdapterView<?> adapterview, View v,
 			int position, long id) {
 		NameValuePair pair = getValue(position);
-		view = mView.findViewById(R.id.out_animate);
+		View view = mView.findViewById(R.id.out_animate);
 		Animator animator = AnimatorInflater.loadAnimator(getActivity(), pair.value);
 		animator.setTarget(view);
 		animator.start();
