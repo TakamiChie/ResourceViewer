@@ -9,7 +9,12 @@
         <item>アニメーション</item>
         <item>インタポーレータ</item>
         <item>アニメーター</item>
-        <item >配列</item>
+        <item>配列</item>
+        <item>アトリビュート</item>
+        <item>スタイル</item>
     </string-array>
+
+    <string name="op_show_activity">アクティビティ表示</string>
+    <string name="title_activity_demo">DemoActivity</string>
 
 </resources>

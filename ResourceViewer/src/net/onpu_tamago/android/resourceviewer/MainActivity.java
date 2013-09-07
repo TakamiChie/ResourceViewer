@@ -3,6 +3,8 @@ package net.onpu_tamago.android.resourceviewer;
 import net.onpu_tamago.android.resourceviewer.viewer.AnimationFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.AnimatorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.ArrayFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.AttrFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.StyleFragment;
 import android.app.ActionBar;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ public class MainActivity extends FragmentActivity implements
 	 */
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 	public static final String EXTRA_INDEX = "index";
+	public static final String EXTRA_THEME = "theme";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,12 @@ public class MainActivity extends FragmentActivity implements
 			break;
 		case 3:
 			fragment = new ArrayFragment();
+			break;
+		case 4:
+			fragment = new AttrFragment();
+			break;
+		case 5:
+			fragment = new StyleFragment();
 			break;
 		default:
 			break;

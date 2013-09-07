@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="net.onpu_tamago.android.resourceviewer.DemoActivity"
+            android:label="@string/title_activity_demo"
+            android:parentActivityName="net.onpu_tamago.android.resourceviewer.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="net.onpu_tamago.android.resourceviewer.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
