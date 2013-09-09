@@ -6,14 +6,14 @@ import net.onpu_tamago.android.resourceviewer.viewer.ArrayFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.AttrFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.ColorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.StyleFragment;
-import android.app.ActionBar;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.ArrayAdapter;
 
-public class MainActivity extends FragmentActivity implements
+public class MainActivity extends ActionBarActivity implements
 		ActionBar.OnNavigationListener {
 
 	/**
@@ -30,7 +30,7 @@ public class MainActivity extends FragmentActivity implements
 		setContentView(R.layout.activity_main);
 
 		// Set up the action bar to show a dropdown list.
-		final ActionBar actionBar = getActionBar();
+		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 
@@ -51,7 +51,7 @@ public class MainActivity extends FragmentActivity implements
 	public void onRestoreInstanceState(Bundle savedInstanceState) {
 		// Restore the previously serialized current dropdown position.
 		if (savedInstanceState.containsKey(STATE_SELECTED_NAVIGATION_ITEM)) {
-			getActionBar().setSelectedNavigationItem(
+			getSupportActionBar().setSelectedNavigationItem(
 					savedInstanceState.getInt(STATE_SELECTED_NAVIGATION_ITEM));
 		}
 	}
@@ -59,7 +59,7 @@ public class MainActivity extends FragmentActivity implements
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// Serialize the current dropdown position.
-		outState.putInt(STATE_SELECTED_NAVIGATION_ITEM, getActionBar()
+		outState.putInt(STATE_SELECTED_NAVIGATION_ITEM, getSupportActionBar()
 				.getSelectedNavigationIndex());
 	}
 

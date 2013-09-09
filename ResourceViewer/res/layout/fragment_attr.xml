@@ -11,8 +11,7 @@
     <Spinner
         android:id="@+id/out_items"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:prompt="@android:string/ok" />
+        android:layout_height="wrap_content" />
 
     <RadioGroup
         android:id="@+id/edit_bktype"

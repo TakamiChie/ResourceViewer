@@ -4,6 +4,7 @@ import net.onpu_tamago.android.resourceviewer.R;
 import net.onpu_tamago.android.resourceviewer.classes.NameValuePair;
 import android.animation.Animator;
 import android.animation.AnimatorInflater;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.ArrayAdapter;
 
 import com.androidquery.AQuery;
 
+@SuppressLint("NewApi")
 public class AnimatorFragment extends AbstractViewerFragment implements OnItemSelectedListener {
 
 	private View mView;
@@ -39,7 +41,7 @@ public class AnimatorFragment extends AbstractViewerFragment implements OnItemSe
 		$.id(R.id.in_animationtype)
 				.adapter(
 						new ArrayAdapter<NameValuePair>(getActivity(),
-								android.R.layout.simple_spinner_dropdown_item,
+								android.R.layout.simple_spinner_item,
 								getIDList())).getSpinner()
 				.setOnItemSelectedListener(this);
 	}
