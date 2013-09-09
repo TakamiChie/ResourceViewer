@@ -17,6 +17,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.androidquery.AQuery;
@@ -26,7 +29,7 @@ import com.androidquery.AQuery;
  * 
  */
 public class AttrFragment extends AbstractViewerFragment implements
-		OnItemSelectedListener {
+		OnItemSelectedListener, OnCheckedChangeListener {
 
 	private View mView;
 
@@ -52,6 +55,7 @@ public class AttrFragment extends AbstractViewerFragment implements
 						new ArrayAdapter<NameValuePair>(getActivity(),
 								android.R.layout.simple_list_item_1,
 								getIDList())).itemSelected(this);
+		((RadioGroup)$.id(R.id.edit_bktype).getView()).setOnCheckedChangeListener(this);
 	}
 
 	@Override
@@ -102,5 +106,20 @@ public class AttrFragment extends AbstractViewerFragment implements
 	@Override
 	public void onNothingSelected(AdapterView<?> adapterView) {
 		onItemSelected(adapterView, null, 0, 0);
+	}
+
+	@Override
+	public void onCheckedChanged(RadioGroup group, int id) {
+		int c = android.R.color.background_light;
+		switch(id){
+		case R.id.edit_light:
+			c = android.R.color.background_light;
+			break;
+		case R.id.edit_dark:
+			c = android.R.color.background_dark;
+			break;
+		}
+		ScrollView frame = (ScrollView) mView.findViewById(R.id.views_background);
+		frame.setBackgroundResource(c);
 	}
 }

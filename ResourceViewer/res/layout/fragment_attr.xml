@@ -14,7 +14,28 @@
         android:layout_height="wrap_content"
         android:prompt="@android:string/ok" />
 
+    <RadioGroup
+        android:id="@+id/edit_bktype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/edit_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/edit_light" />
+
+        <RadioButton
+            android:id="@+id/edit_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_dark" />
+    </RadioGroup>
+
     <ScrollView
+        android:id="@+id/views_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -22,6 +43,7 @@
             android:id="@+id/views"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>
