@@ -4,6 +4,7 @@ import net.onpu_tamago.android.resourceviewer.viewer.AnimationFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.AnimatorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.ArrayFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.AttrFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.ColorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.StyleFragment;
 import android.app.ActionBar;
 import android.content.res.Resources;
@@ -82,6 +83,9 @@ public class MainActivity extends FragmentActivity implements
 			fragment = new AttrFragment();
 			break;
 		case 5:
+			fragment = new ColorFragment();
+			break;
+		case 6:
 			fragment = new StyleFragment();
 			break;
 		default:
