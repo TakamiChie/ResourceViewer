@@ -23,7 +23,7 @@ public class ArrayFragment extends AbstractViewerFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		mView = inflater.inflate(R.layout.fragment_string_list, container,
+		mView = inflater.inflate(R.layout.fragment_list, container,
 				false);
 		return mView;
 	}
