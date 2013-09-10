@@ -1,5 +1,7 @@
 package net.onpu_tamago.android.resourceviewer.viewer;
 
+import java.util.ArrayList;
+
 import net.onpu_tamago.android.resourceviewer.R;
 import net.onpu_tamago.android.resourceviewer.classes.NameValuePair;
 import android.animation.Animator;
@@ -36,14 +38,17 @@ public class AnimatorFragment extends AbstractViewerFragment implements OnItemSe
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
+		ArrayList<NameValuePair> list = getIDList();
+		if(list != null){
 		AQuery $ = new AQuery(mView);
 
 		$.id(R.id.in_animationtype)
 				.adapter(
 						new ArrayAdapter<NameValuePair>(getActivity(),
-								android.R.layout.simple_spinner_item,
-								getIDList())).getSpinner()
+								android.R.layout.simple_list_item_1,
+								list)).getSpinner()
 				.setOnItemSelectedListener(this);
+		}
 	}
 
 	@Override

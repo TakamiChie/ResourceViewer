@@ -64,7 +64,7 @@ public class AnimationFragment extends AbstractViewerFragment implements
 		$.id(R.id.in_animationtype)
 				.adapter(
 						new ArrayAdapter<NameValuePair>(getActivity(),
-								android.R.layout.simple_spinner_item,
+								android.R.layout.simple_list_item_1,
 								getIDList())).getSpinner()
 				.setOnItemSelectedListener(this);
 	}

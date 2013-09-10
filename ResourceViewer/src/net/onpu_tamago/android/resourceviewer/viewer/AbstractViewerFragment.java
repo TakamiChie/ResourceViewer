@@ -15,56 +15,65 @@ public abstract class AbstractViewerFragment extends Fragment {
 
 	/**
 	 * 値をリストアップするクラス
+	 * 
 	 * @return クラスオブジェクト
 	 */
 	protected abstract Class<?> getListupClass();
-	
+
 	/**
 	 * IDリストを取得する
+	 * 
 	 * @return IDリスト
 	 */
-	protected ArrayList<NameValuePair> getIDList(){
+	protected ArrayList<NameValuePair> getIDList() {
 		return mIds;
 	}
-	
+
 	/**
 	 * 値を取得する
-	 * @param position 項目インデックス
+	 * 
+	 * @param position
+	 *            項目インデックス
 	 * @return 値
 	 */
-	protected NameValuePair getValue(int position){
+	protected NameValuePair getValue(int position) {
 		return mIds.get(position);
 	}
-	
+
 	/**
 	 * リストアップアイテムの個別フィルタリング処理
-	 * @param field 出力対象のフィールドオブジェクト
+	 * 
+	 * @param field
+	 *            出力対象のフィールドオブジェクト
 	 * @return trueの場合、項目をリストアップする
 	 */
-	protected boolean filtering(Field field){
+	protected boolean filtering(Field field) {
 		return true;
 	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 
-		Field[] fields = getListupClass().getFields();
-		mIds = new ArrayList<NameValuePair>();
+		try {
+			Field[] fields = getListupClass().getFields();
+			mIds = new ArrayList<NameValuePair>();
 
-		for (Field f : fields) {
-			try {
-				boolean add = filtering(f);
-				if (add) {
-					Log.d(TAG, f.getName());
-					mIds.add(new NameValuePair(f.getName(), f.getInt(null)));
+			for (Field f : fields) {
+				try {
+					boolean add = filtering(f);
+					if (add) {
+						Log.d(TAG, f.getName());
+						mIds.add(new NameValuePair(f.getName(), f.getInt(null)));
+					}
+				} catch (IllegalArgumentException e) {
+					throw new RuntimeException(e);
+				} catch (IllegalAccessException e) {
+					throw new RuntimeException(e);
 				}
-			} catch (IllegalArgumentException e) {
-				throw new RuntimeException(e);
-			} catch (IllegalAccessException e) {
-				throw new RuntimeException(e);
 			}
+		} catch (NoClassDefFoundError e) {
 		}
 
-		
 	}
 }
