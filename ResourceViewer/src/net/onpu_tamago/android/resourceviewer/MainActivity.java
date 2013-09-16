@@ -6,6 +6,7 @@ import net.onpu_tamago.android.resourceviewer.viewer.ArrayFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.AttrFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.ColorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.DimensionFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.DrawableFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.StyleFragment;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -90,6 +91,9 @@ public class MainActivity extends ActionBarActivity implements
 			fragment = new DimensionFragment();
 			break;
 		case 7:
+			fragment = new DrawableFragment();
+			break;
+		case 8:
 			fragment = new StyleFragment();
 			break;
 		default:
