@@ -15,6 +15,7 @@
         <item>色</item>
         <item>Dimension</item>
         <item>Drawable</item>
+       	<item>数値</item>
         <item>スタイル</item>
     </string-array>
 
