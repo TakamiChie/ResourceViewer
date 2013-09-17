@@ -9,6 +9,7 @@ import net.onpu_tamago.android.resourceviewer.viewer.DimensionFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.DrawableFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.IntFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.InterpolatorFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.LayoutFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.StyleFragment;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class MainActivity extends ActionBarActivity implements
 	private static final String STATE_SELECTED_NAVIGATION_ITEM = "selected_navigation_item";
 	public static final String EXTRA_INDEX = "index";
 	public static final String EXTRA_THEME = "theme";
+	public static final String EXTRA_LAYOUT = "layout";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +104,9 @@ public class MainActivity extends ActionBarActivity implements
 			fragment = new InterpolatorFragment();
 			break;
 		case 10:
+			fragment = new LayoutFragment();
+			break;
+		case 11:
 			fragment = new StyleFragment();
 			break;
 		default:

@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hint_animate">Animation Image</string>
     <string name="hint_iconimage">Icon Image</string>
-    
+
     <string-array name="title_fragments">
         <item>アニメーション</item>
         <item>インタポーレータ</item>
@@ -15,8 +15,9 @@
         <item>色</item>
         <item>Dimension</item>
         <item>Drawable</item>
-       	<item>数値</item>
-       	<item>インタポーレータ(新)</item>
+        <item>数値</item>
+        <item>インタポーレータ(新)</item>
+        <item>レイアウト</item>
         <item>スタイル</item>
     </string-array>
 
@@ -28,5 +29,6 @@
     <string name="op_saveiconbackground">背景色付きで画像を保存</string>
     <string name="wording_save_success">正常に保存されました</string>
     <string name="wording_save_failed">保存に失敗しました\n%s</string>
+    <string name="title_activity_layout_viewer">レイアウト</string>
 
 </resources>
