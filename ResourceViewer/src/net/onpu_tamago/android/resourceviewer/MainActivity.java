@@ -8,6 +8,7 @@ import net.onpu_tamago.android.resourceviewer.viewer.ColorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.DimensionFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.DrawableFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.IntFragment;
+import net.onpu_tamago.android.resourceviewer.viewer.InterpolatorFragment;
 import net.onpu_tamago.android.resourceviewer.viewer.StyleFragment;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -98,6 +99,9 @@ public class MainActivity extends ActionBarActivity implements
 			fragment = new IntFragment();
 			break;
 		case 9:
+			fragment = new InterpolatorFragment();
+			break;
+		case 10:
 			fragment = new StyleFragment();
 			break;
 		default:

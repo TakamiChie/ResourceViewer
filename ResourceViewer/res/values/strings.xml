@@ -16,6 +16,7 @@
         <item>Dimension</item>
         <item>Drawable</item>
        	<item>数値</item>
+       	<item>インタポーレータ(新)</item>
         <item>スタイル</item>
     </string-array>
 
