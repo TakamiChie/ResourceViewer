@@ -1,6 +1,9 @@
 package net.onpu_tamago.android.resourceviewer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import android.annotation.TargetApi;
 import android.app.ListActivity;
@@ -16,16 +19,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SimpleExpandableListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LayoutViewerActivity extends ListActivity {
 
 	private static final String TAG = "[LayoutViewer]ResourceViewer";
-	private ViewGroup mView;
 	private ArrayList<View> mViewList;
 
 	@Override
@@ -40,10 +44,9 @@ public class LayoutViewerActivity extends ListActivity {
 				View view = inflater.inflate(
 						intent.getIntExtra(MainActivity.EXTRA_LAYOUT, 0), null);
 				frame.addView(view);
-				mView = view instanceof ViewGroup ? (ViewGroup) view : frame;
 				mViewList = new ArrayList<View>();
 				ArrayList<String> names = new ArrayList<String>();
-				setViewComments(mView, names);
+				setViewComments(frame, names);
 				setListAdapter(new ArrayAdapter<String>(this,
 						android.R.layout.simple_list_item_1, names));
 			}
@@ -67,21 +70,48 @@ public class LayoutViewerActivity extends ListActivity {
 				Log.d(TAG, "index:" + i);
 				Log.d(TAG, v.getClass().getName());
 				try {
-					String n = res.getResourceName(v.getId());
-					String shown = res.getResourceEntryName(v.getId());
-					names.add(n + ":" + v.getClass().getSimpleName());
-					if (v instanceof ImageView) {
-						((ImageView) v)
-								.setImageResource(android.R.drawable.sym_def_app_icon);
-					} else if (v instanceof TextView) {
-						((TextView) v).setText(shown);
-					} else if (v instanceof ListView) {
-						((ListView) v).setAdapter(new ArrayAdapter<String>(
-								this, android.R.layout.simple_list_item_1,
-								new String[] { shown }));
+					if (v.getId() != 0xffffffff) {
+						String n = res.getResourceName(v.getId());
+						String shown = res.getResourceEntryName(v.getId());
+						names.add(n + ":" + v.getClass().getSimpleName());
+						if (v instanceof ImageView) {
+							((ImageView) v)
+									.setImageResource(android.R.drawable.sym_def_app_icon);
+						} else if (v instanceof TextView) {
+							((TextView) v).setText(shown);
+						} else if (v instanceof ExpandableListView) {
+							List<Map<String, String>> groupList = new ArrayList<Map<String, String>>();
+							List<List<Map<String, String>>> childList = new ArrayList<List<Map<String, String>>>();
+							Map<String, String> groupElement = new HashMap<String, String>();
+							groupElement.put("GROUP_TITLE", "Group");
+							groupList.add(groupElement);
+							// Childのリスト
+							List<Map<String, String>> childElements = new ArrayList<Map<String, String>>();
+							for (int j = 0; j < 3; j++) {
+								Map<String, String> child = new HashMap<String, String>();
+								child.put("CHILD_TITLE", "Item " + j);
+								childElements.add(child);
+							}
+							childList.add(childElements);
+							SimpleExpandableListAdapter s = new SimpleExpandableListAdapter(
+									this,
+									groupList,
+									android.R.layout.simple_expandable_list_item_1,
+									new String[] { "GROUP_TITLE" },
+									new int[] { android.R.id.text1 },
+									childList,
+									android.R.layout.simple_list_item_1,
+									new String[] { "CHILD_TITLE" },
+									new int[] { android.R.id.text1 });
+							((ExpandableListView) v).setAdapter(s);
+						} else if (v instanceof ListView) {
+							((ListView) v).setAdapter(new ArrayAdapter<String>(
+									this, android.R.layout.simple_list_item_1,
+									new String[] { shown }));
+						}
+						v.setTag(n);
+						mViewList.add(v);
 					}
-					v.setTag(n);
-					mViewList.add(v);
 					if (v instanceof ViewGroup) {
 						setViewComments((ViewGroup) v, names);
 					}
