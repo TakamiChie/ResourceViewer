@@ -41,9 +41,10 @@ public class LayoutViewerActivity extends ListActivity {
 			if (intent != null && intent.hasExtra(MainActivity.EXTRA_LAYOUT)) {
 				LayoutInflater inflater = getLayoutInflater();
 				FrameLayout frame = (FrameLayout) findViewById(R.id.frame);
-				View view = inflater.inflate(
-						intent.getIntExtra(MainActivity.EXTRA_LAYOUT, 0), null);
+				int resid = intent.getIntExtra(MainActivity.EXTRA_LAYOUT, 0);
+				View view = inflater.inflate(resid, null);
 				frame.addView(view);
+				setTitle(getResources().getResourceName(resid));
 				mViewList = new ArrayList<View>();
 				ArrayList<String> names = new ArrayList<String>();
 				setViewComments(frame, names);
