@@ -1,5 +1,6 @@
 package net.onpu_tamago.android.resourceviewer;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +37,7 @@ public class LayoutViewerActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_layout_viewer);
+
 		Intent intent = getIntent();
 		try {
 			if (intent != null && intent.hasExtra(MainActivity.EXTRA_LAYOUT)) {
@@ -65,16 +67,31 @@ public class LayoutViewerActivity extends ListActivity {
 		int c = view.getChildCount();
 		Resources res = getResources();
 		Log.d(TAG, "Layout Check Start");
+		// IDリスト取得
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		Field[] fs = android.R.id.class.getFields();
+		for (Field f : fs) {
+			try {
+				ids.add(f.getInt(null));
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+
 		for (int i = 0; i < c; i++) {
 			View v = view.getChildAt(i);
 			if (!v.getClass().equals(android.view.View.class)) {
 				Log.d(TAG, "index:" + i);
 				Log.d(TAG, v.getClass().getName());
 				try {
-					if (v.getId() != 0xffffffff) {
+					int id = v.getId();
+					if (id != 0xffffffff) {
 						String n = res.getResourceName(v.getId());
 						String shown = res.getResourceEntryName(v.getId());
-						names.add(n + ":" + v.getClass().getSimpleName());
+						boolean pub =ids.contains(id);
+						names.add(n + ":" + v.getClass().getSimpleName() + (pub ? "(public)" : "(private)"));
 						if (v instanceof ImageView) {
 							((ImageView) v)
 									.setImageResource(android.R.drawable.sym_def_app_icon);
