@@ -17,7 +17,9 @@ public class DemoActivity extends ActionBarActivity {
 		Intent intent = getIntent();
 		try {
 			if (intent != null && intent.hasExtra(MainActivity.EXTRA_THEME)) {
-				setTheme(intent.getIntExtra(MainActivity.EXTRA_THEME, 0));
+				int id = intent.getIntExtra(MainActivity.EXTRA_THEME, 0);
+				setTheme(id);
+				setTitle(getResources().getResourceName(id));
 			}
 			setContentView(R.layout.activity_demo);
 			// Show the Up button in the action bar.
