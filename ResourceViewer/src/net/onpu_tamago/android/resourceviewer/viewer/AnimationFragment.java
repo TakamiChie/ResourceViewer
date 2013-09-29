@@ -8,6 +8,7 @@ import net.onpu_tamago.android.resourceviewer.classes.NameValuePair;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,11 +20,12 @@ import com.androidquery.AQuery;
 
 /**
  * アニメーション・インターポレーターを確認する際のフラグメント
+ * 
  * @author 知英
- *
+ * 
  */
 public class AnimationFragment extends AbstractViewerFragment implements
-		OnItemSelectedListener {
+		OnItemSelectedListener, OnClickListener {
 
 	@SuppressWarnings("unused")
 	private static final String TAG = "[Animation]ResourceViewer";
@@ -54,7 +56,7 @@ public class AnimationFragment extends AbstractViewerFragment implements
 		}
 		return add;
 	}
-	
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
@@ -67,11 +69,36 @@ public class AnimationFragment extends AbstractViewerFragment implements
 								android.R.layout.simple_list_item_1,
 								getIDList())).getSpinner()
 				.setOnItemSelectedListener(this);
+		$.id(R.id.op_replay).clicked(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.op_replay:
+			AQuery $ = new AQuery(mView);
+
+			animation($.id(R.id.in_animationtype).getSelectedItemPosition());
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 	@Override
 	public void onItemSelected(AdapterView<?> adapterview, View view,
 			int position, long id) {
+		animation(position);
+	}
+
+	@Override
+	public void onNothingSelected(AdapterView<?> adapterview) {
+		onItemSelected(adapterview, null, 0, 0);
+	}
+
+	private void animation(int position) {
 		NameValuePair pair = getValue(position);
 
 		Animation animation;
@@ -89,11 +116,6 @@ public class AnimationFragment extends AbstractViewerFragment implements
 
 		AQuery $ = new AQuery(mView);
 		$.id(R.id.out_animate).animate(animation);
-	}
-
-	@Override
-	public void onNothingSelected(AdapterView<?> adapterview) {
-		onItemSelected(adapterview, null, 0, 0);
 	}
 
 }

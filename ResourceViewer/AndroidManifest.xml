@@ -17,7 +17,7 @@
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar" >
         <activity
             android:name="net.onpu_tamago.android.resourceviewer.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" android:uiOptions="splitActionBarWhenNarrow">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

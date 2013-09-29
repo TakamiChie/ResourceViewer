@@ -31,5 +31,6 @@
     <string name="wording_save_success">正常に保存されました</string>
     <string name="wording_save_failed">保存に失敗しました\n%s</string>
     <string name="title_activity_layout_viewer">レイアウト</string>
+    <string name="op_play">再生</string>
 
 </resources>
