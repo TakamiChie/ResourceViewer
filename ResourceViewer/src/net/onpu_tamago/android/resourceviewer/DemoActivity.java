@@ -1,15 +1,15 @@
 package net.onpu_tamago.android.resourceviewer;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class DemoActivity extends ActionBarActivity {
+public class DemoActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class DemoActivity extends ActionBarActivity {
 			// Show the Up button in the action bar.
 			setupActionBar();
 		} catch (Exception e) {
+			e.printStackTrace();
 			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 			finish();
 		}
